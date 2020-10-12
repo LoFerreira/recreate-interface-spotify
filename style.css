@@ -145,9 +145,10 @@ body {
 }
 
 .main__col img {
-    width: 110px;
-    height: 120px;
-    padding: 3px;
+    max-width: 70px;
+    max-height: 100px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .main__col h3 {
@@ -178,7 +179,8 @@ body {
 }
 
 .player__artist img {
-    max-width: 70px;
+    max-width: 50px;
+    max-height: 100px;
     display: inline-block;
     vertical-align: middle;
 }
@@ -192,7 +194,8 @@ body {
     margin-left: 10px;
 }
 
-.player__artist h3>span {
+.player__artist h3,
+span {
     color: rgb(200, 200, 200);
     font-size: 13px;
 }

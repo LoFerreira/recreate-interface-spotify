@@ -128,42 +128,18 @@
                         <h2>Minhas músicas</h2>
                     </div>
 
-                    <div class='main__col' data-image='imgs/chopin.jfif' data-artist='Frédéric Chopin' data-song='Nocturne op.9 No.2' data-file='assets/Nocturne op.9 No.2.m4a'>
+                    <div class='main__col' data-image='imgs/chopin.jfif' data-artist='Frédéric Chopin' data-song='Nocturne op.9 No.2' data-file='assets/nocturne.m4a'>
                         <img src='imgs/chopin.jfif' />
                         <h3>Frédéric Chopin</h3>
-                        <p>Nocturne op.9 No.2</p>
+                        <p>Chopin - Nocturne op.9 No.2.</p>
                     </div>
 
-                    <div class='main__col'>
-                        <img src='imgs/top50.jpg' />
-                        <h3>As 50 mais tocadas</h3>
-                        <p>Aqui vai a descrição da minha música...</p>
+                    <div class='main__col' data-image='imgs/beethoven.jpg' data-artist='Beethoven' data-song='Beethoven - Silence.' data-file='assets/silence.mp3'>
+                        <img src='imgs/beethoven.jpg' />
+                        <h3>Ludwig Van Beethoven</h3>
+                        <p>Beethoven - Silence.</p>
                     </div>
 
-                    <div class='main__col'>
-                        <img src='imgs/top50.jpg' />
-                        <h3>As 50 mais tocadas</h3>
-                        <p>Aqui vai a descrição da minha música...</p>
-                    </div>
-
-                    <div class='main__col'>
-                        <img src='imgs/top50.jpg' />
-                        <h3>As 50 mais tocadas</h3>
-                        <p>Aqui vai a descrição da minha música...</p>
-                    </div>
-
-                    <div class='main__col'>
-                        <img src='imgs/top50.jpg' />
-                        <h3>As 50 mais tocadas</h3>
-                        <p>Aqui vai a descrição da minha música...</p>
-                    </div>
-
-                    <div class='main__col'>
-                        <img src='imgs/top50.jpg' />
-                        <h3>As 50 mais tocadas</h3>
-                        <p>Aqui vai a descrição da minha música...</p>
-                    </div>
-                    
                 </div>
             </div>
         </div>
@@ -175,53 +151,72 @@
             <div class='player__control'>
                 <div class='player__control__buttons'>
                     <a href=''><i class='fas fa-backward'></i></a>
-                    <a style='display: none;' id='pauseBtn' href='#'><i class='far fa-pause-circle'></i></a>
-                    <a id='playBtn' href='#'><i class='far fa-play-circle'></i></a>
+                    <a style='display: none;' id='pauseBtn' href=''><i class='far fa-pause-circle'></i></a>
+                    <a style='display: inline;' id='playBtn' href='#'><i class='far fa-play-circle'></i></a>
                     <a href=''><i class='fas fa-forward'></i></a>
                 </div>
 
                 <div class='player__control__progress'>
-                    <div class='player__control__progress__2'>
+                    <div style='width:0%' class='player__control__progress__2'>
 
                     </div>
                 </div>
             </div>
         </div>
 
-        <audio id='audioplayer' style='position: absolute; left: 0; top: 0; z-index: -999; opacity:0;' controls=''>
+        <audio id='audioplayer' style='position: absolute; left: 0; top: 0; z-index: -999; opacity:0;' controls="">
 
         </audio>
 
         <Script src='scrypt.js/all.min.js'></script>
 
         <script>
-            var audioplayer = document.getElementById('audioplayer');
+
+            var audioPlayer = document.getElementById('audioplayer');
             var loaded = false;
             var playBtn = document.getElementById('playBtn');
             var pauseBtn = document.getElementById('pauseBtn');
 
-            document.getElementById('pauseBtn').addEventListener('click',(e) =>{
+            pauseBtn.addEventListener('click',(e)=>{
                 e.preventDefault();
-                
-                playBtn.style.display = "inline";
-                pauseBtn.style.display = "none";
-                
-                return false;
+                playBtn.style.display = 'inline';
+                pauseBtn.style.display = 'none';
+                audioPlayer.pause();
+                return;
             });
 
-            const playsong = (file) => {
+             playBtn.addEventListener('click',(e)=>{
+                e.preventDefault();
+                playBtn.style.display = 'none';
+                pauseBtn.style.display = 'inline';
+                audioPlayer.play();
+                return;
+            });
 
+            var playSong = (file)=>{
                 if(loaded == false){
-                    audioplayer.innerHTML = "<source src='+file+' type='audio.mp3' />"
+                    audioPlayer.innerHTML = '<source src="'+file+'" type="audio/mp3" />';
                     loaded = true;
                 }
 
-                audioplayer.play();
+                audioPlayer.play();
+                playBtn.style.display = 'none';
+                pauseBtn.style.display = 'inline';
+            }
 
-                playBtn.style.display = "none";
-                pauseBtn.style.display = "inline";
+            document.querySelectorAll('.main__col').forEach(item =>{
+                item.addEventListener('click',event=>{
+                    let image = item.getAttribute('data-image');
+                    let artist = item.getAttribute('data-artist');
+                    let song = item.getAttribute('data-song');
+                    let file = item.getAttribute('data-file');
 
-            };
+                    let playerArtistComponent = document.getElementsByClassName('player__artist');
+                    playerArtistComponent[0].innerHTML = '<img src="'+image+'" /> <h3>'+artist+'<br/><span>'+song+'</span></h3>';
+                    playSong(file);
+                    return ;
+                })
+            });
 
         </script>
     </body>
