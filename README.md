@@ -12,5 +12,5 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 - [HTML]
 - [CSS]
-- [JavaScript](https://pt-br.reactjs.org/)
+- [JavaScript](https://www.javascript.com/)
 - [Font awesome](https://fontawesome.com/)
